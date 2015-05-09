@@ -1,0 +1,116 @@
+<style>
+#header {
+	background-color:#eeeeee;
+	color:white;
+	text-align:center;
+	float:left;
+	padding:10px; 
+}
+body{
+  
+  background-color:#f0f0f0;
+  font-family: 'Open Sans', sans-serif;
+} 
+
+#section {
+    width:400px;
+    float:left;
+    padding:10px; 
+	
+
+}
+
+.inputwrap label {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+	margin-right: 0.5em;
+
+}
+#dbResultsTable
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	margin: 0px;
+	width: 480px;
+	text-align: left;
+	border-collapse: collapse;
+}
+#dbResultsTable th
+{
+	font-size: 13px;
+	font-weight: normal;
+	padding: 8px;
+	background: #b9c9fe;
+	border-top: 4px solid #aabcfe;
+	border-bottom: 1px solid #fff;
+	color: #039;
+}
+#dbResultsTable td
+{
+	padding: 8px;
+	background: #e8edff; 
+	border-bottom: 1px solid #fff;
+	color: #669;
+	border-top: 1px solid transparent;
+}
+#dbResultsTable tr:hover td
+{
+	background: #d0dafd;
+	color: #339;
+}
+
+#section{
+  float:left;
+  height:86%;
+  width:70%;
+  box-sizing:border-box;
+  padding:20px;
+  
+}
+#bgPlate{
+	background: #e8edff; 
+} 
+
+.inputwrap{
+  background: #b9c9fe;
+  height:50px;
+  width:80%;
+  border-radius:3px;
+  border:rgba(0,0,0,.3) 2px solid;
+  box-sizing:border-box;
+  padding:10px;
+  margin-bottom:30px;
+}
+
+.iButton{
+  height:30px;
+  width:50%;
+  border-radius:3px;
+  border:rgba(0,0,0,.3) 0px solid;
+  box-sizing:border-box;
+  padding:10px;
+  margin-bottom:30px;
+  background:#90c843;
+  color:#FFF;
+  font-weight:bold;
+  font-size: 12pt;
+  transition:background .4s;
+  cursor:pointer;
+}
+
+.iButton:hover{
+  background:#80b438;
+  
+}
+
+</style>
+
+/ * Table design learned from http://www.smashingmagazine.com/ "Top 10 CSS Table Designs"
+ * Here is the link to the tutorial:http://www.smashingmagazine.com/2008/08/13/top-10-css-table-designs/ 
+*
+* To help me style the form I followed the html 5 tutorial: 
+* http://www.freshdesignweb.com/css-registration-form-templates.html 
+*
+*
+ */

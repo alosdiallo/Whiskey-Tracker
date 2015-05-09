@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CSCI E-3 Unit 2 Project:  Part B</title>
+    <link rel="stylesheet" href="css/cscie3.css">
+  </head>
+  <body class="hw">
+	<div id="header">
+		<h1>Whiskey Tracker</h1>
+	</div>
+
+<div id="section">
+	
+		<p>
+		Whiskey tracker is a tool used to help people come together and share their favorite whiskey's with their friends.  
+		Add your name and favorite whiskey to our list and compare what you like with that of your peers!  
+		</p>
+		<p>
+		Currently I am not tracking Scotch hence the "ey", but feel free to add that as well.  
+		</p>
+	<form autocomplete="off" action="" name="whiskey"><br>
+		<fieldset>
+		<legend>Whiskey Tracker:</legend>
+		<div id=bgPlate>
+			
+			<div class="inputwrap">
+			<label for="Brand"> Brand: </label><input type="text" id="Brand"><br>
+			</div>
+			<div class="inputwrap">
+			<label for="Name"> Name:</label> <input type="text" id="Name"><br>
+			</div>
+			<div class="inputwrap">
+			<label for="Vintage"> Age/Vintage: </label> <input type="text" id="Vintage">
+			</div>
+			<div class="inputwrap">
+			<label for="Type"> Type: </label> <input type="text" id="Type">
+			</div>
+			<div class="inputwrap">
+			<label for="Country"> Country: </label><input type="text" id="Country"><br>
+			</div>
+			<div class="inputwrap">
+			<label for="Cost"> Cost:</label> <input type="text" id="Cost"><br>
+			</div>		
+			<br>
+			<button class = "iButton" type="button" id="whiskeyButton"> Save Record </button>
+			<button class = "iButton" type="button" id="whiskeyButtonShow"> Show Record </button>
+			</div>
+		</fieldset>
+
+
+		<fieldset>
+			<legend>Inventory Information:</legend>
+			<div id="Feedback"></div>
+			<div id="outPut"></div>
+			<br><div id="plotSpace"></div><br>
+			<br><div id="map-canvas"></div><br>
+		</fieldset>
+	</form>	
+</div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"> </script>
+	<script src="//cdn.jsdelivr.net/pouchdb/3.4.0/pouchdb.min.js"></script>
+    <script type="text/javascript" src="js/finalProject.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	 <script type="text/javascript" src="http://www.google.com/uds/modules/gviz/gviz-api.js "></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>	 
+<script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['corechart']}]}"></script>	
+<script type="text/javascript" src="https://apis.google.com/js/auth.js?onload=init"></script>
+	
+  </body>
+</html>
