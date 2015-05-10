@@ -38,6 +38,7 @@ window.onload = function formValidation(){
 	var vintageW = f.elements["Vintage"].value.trim();
 	var typeW = f.elements["Type"].value.trim();
 	var countryW = f.elements["Country"].value.trim();
+	var bottleW = f.elements["BottleNumber"].value.trim();
 	
 	//Here I am removing any dollar signs from the cost field
 	f.elements["Cost"].addEventListener("focusout", function() {
@@ -57,11 +58,15 @@ window.onload = function formValidation(){
 			alert(err.message);
 		}
 	});
-	
-
-
-
-    
+	f.elements["BottleNumber"].addEventListener("focusout", function() {
+		try {
+			f.elements["BottleNumber"].value = f.elements["BottleNumber"].value.replace(/\D/g,'');	
+		}
+		catch(err) {
+			alert(err.message);
+		}
+	});
+  
 }
 
 
@@ -79,6 +84,7 @@ function clearFields() {
 	f.elements["Vintage"].value="";
 	f.elements["Type"].value="";
 	f.elements["Country"].value="";
+	f.elements["BottleNumber"].value="";
 
 }
 
@@ -113,6 +119,7 @@ whiskeySbtn.onclick = function addWhiskey() {
 	var typeW = document.getElementById("Type").value.trim();
 	var countryW = document.getElementById("Country").value.trim();
 	var costW = document.getElementById("Cost").value.trim();
+	var bottleW = document.getElementById("BottleNumber").value.trim();
 	
 	//Check to see if our text boxes are empty.
 	if(document.getElementById("Brand").value == ''){
@@ -129,7 +136,8 @@ whiskeySbtn.onclick = function addWhiskey() {
 			brand: brandW,
 			type: typeW,
 			country: countryW,		
-			cost: costW
+			cost: costW,
+			bottle: bottleW
 		};
 
 		//This is where data is inserted in the DB.
@@ -139,7 +147,7 @@ whiskeySbtn.onclick = function addWhiskey() {
 				clearFields();
 				var feedback = document.getElementById("Feedback");
 				var newContent = document.createTextNode("The new entry was successfully added"); 
-				feedback.empty();
+				$(feedback).empty();
 				feedback.appendChild(newContent);
 				counter = 0;
 				console.log("The new entry was successfully added");
@@ -183,8 +191,8 @@ function showTableOfData(data) {
 	myTable.style.width='100%';
 	myTable.setAttribute('border','1');
 	//This array has all of the header names.
-	var arrayText = [ 'Brand', 'Name', 'Vintage','Type', 'Country', 'Cost','Date','Rating','Delete'];
-	var dbArray = ['brand','name','vintage' ,'type' , 'country' , 'cost' , '_id','Rating','Delete'];
+	var arrayText = [ 'Brand', 'Name', 'Vintage','Type', 'Country', 'Cost', 'Number of Bottles','Date','Rating','Delete'];
+	var dbArray = ['brand','name','vintage' ,'type' , 'country' , 'cost', 'bottle', '_id','Rating','Delete'];
 	//Making the first row
 	var header = myTable.createTHead();
 	var row = header.insertRow(0); 
