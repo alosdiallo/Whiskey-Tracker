@@ -59,23 +59,51 @@ window.onload = function formValidation(){
 	});
 	
 
+
+
     
 }
 
 
+
+/*************************************************
+* This will clear the input fields 
+*************************************************/
+function clearFields() {
+	//$("output").html("");
+	$("plotSpace").html("");
+	var f = document.forms["whiskey"];
+	f.elements["Cost"].value="";
+	f.elements["Name"].value="";
+	f.elements["Brand"].value="";
+	f.elements["Vintage"].value="";
+	f.elements["Type"].value="";
+	f.elements["Country"].value="";
+
+}
+
+/*Grabbing the buttons*/
+var whiskeySbtn = document.getElementById("whiskeyButton");
+var whiskeySubmitButtonShow = document.getElementById("whiskeyButtonShow");
+
+
 /******************************************************************
- This is all of the code for handling the DB.
+* This is all of the code for handling the DB.
+*  There are 4 main parts
+* 1:Create DB
+* 2:Populate 
+* 3:Lookup and display
+* 4:remove from the DB
  *******************************************************************/
-//Creating the new DB
+
+ //Step 1: Creating the new DB
 var db = new PouchDB('whiskeyTest');
 var remoteCouch = false;
 var counter = 0;
 
-//Grabbing the buttons
-var whiskeySbtn = document.getElementById("whiskeyButton");
-var whiskeySubmitButtonShow = document.getElementById("whiskeyButtonShow");
 
-//This is the code for adding a new whiskey to the Database
+
+//Step 2: This is the code for adding a new whiskey to the Database
 whiskeySbtn.onclick = function addWhiskey() {
 //getting the values in the form
 
@@ -86,11 +114,13 @@ whiskeySbtn.onclick = function addWhiskey() {
 	var countryW = document.getElementById("Country").value.trim();
 	var costW = document.getElementById("Cost").value.trim();
 	
+	//Check to see if our text boxes are empty.
 	if(document.getElementById("Brand").value == ''){
 
 		console.log("Entry Details No data " + document.getElementById("Brand").value);
 	}
 	else{
+		//Create the custom object to populate so that we can populate the DB.
 		var entry = {
 			_id: new Date().toISOString(),
 			name: nameW,
@@ -105,6 +135,7 @@ whiskeySbtn.onclick = function addWhiskey() {
 		//This is where data is inserted in the DB.
 		db.put(entry, function callback(error, result) {
 			if (!error) {
+				//Once we put the data in the DB clear the text and probvide feedback.
 				clearFields();
 				var feedback = document.getElementById("Feedback");
 				var newContent = document.createTextNode("The new entry was successfully added"); 
@@ -113,6 +144,7 @@ whiskeySbtn.onclick = function addWhiskey() {
 				counter = 0;
 				console.log("The new entry was successfully added");
 			}
+			//If not provide the error.
 			else{
 				console.log(error + result);
 			}
@@ -122,30 +154,17 @@ whiskeySbtn.onclick = function addWhiskey() {
 	
 }
 
-//This will clear the input fields 
-function clearFields() {
-	//$("output").html("");
-	$("plotSpace").html("");
-	var f = document.forms["whiskey"];
-	f.elements["Cost"].value="";
-	f.elements["Name"].value="";
-	f.elements["Brand"].value="";
-	f.elements["Vintage"].value="";
-	f.elements["Type"].value="";
-	f.elements["Country"].value="";
 
-}
-
+//Step 3: Retrieve information from DB
 /*Once you click on the button it will send the 
 whole db object to showTableOfData to be output.
 */
 whiskeySubmitButtonShow.onclick = function showData() {
-	//passing all of the data in the db to the relevent functions
+	//passing all of the data in the db to the relevant functions
 	db.allDocs( {include_docs: true, descending: true},
 				function(err, doc) {
 					showTableOfData(doc.rows);
 					plotCost(doc.rows);
-					geoLocation();
 				} );
 				
 	
@@ -195,10 +214,12 @@ function showTableOfData(data) {
 			//Building the table by creating the DOM elements based on what is in the DB.
 			for(var j=0; j< dbArray.length; j++)
 			{
+				//Code for populating the table part 1
 				cellName = "cell";
 				cellName.concat(j);
 				cellName = currentRow.insertCell(j);
 				
+				//Code to create the delete buttons.
 				var buttonID = 'deleteButton' + i;
 				buttonID = String(buttonID);
 				var deleteButton = document.createElement('button');
@@ -212,17 +233,25 @@ function showTableOfData(data) {
 					cellName.appendChild(deleteButton);
 					 
 				}
+				
+				//Code to handle the rating system
 				else if(dbArray[j].match('Rating')){
-					var spanID = 'SPAN' + i;
-					var ratingDiv = document.createElement(spanID);
-					ratingDiv.setAttribute('class', 'starRating');
-					var ratingContents = '<input id="'+ i +'rating5" type="radio" name="rating" value="5"><label for="rating5">5</label><input id="'+ i +'rating4" type="radio" name="rating" value="4"><label for="rating4">4</label><input id="'+ i +'rating3" type="radio" name="rating" value="3" checked><label for="rating3">3</label><input id="'+ i +'rating2" type="radio" name="rating" value="2"><label for="rating2">2</label><input id="'+ i +'rating1" type="radio" name="rating" value="1"><label for="rating1">1</label>';
-					ratingDiv.innerHTML = ratingContents;
+					var generalDiv = 'div';
+					var divID = 'div' + i;
+					var ratingDiv = document.createElement(generalDiv);
+					ratingDiv.setAttribute('id', divID);
+					
+					var innerDivTag = document.createElement('div');
+					innerDivTag.setAttribute('class', 'rating');
+					var ratingContents = '<span><input type="radio" name="rating" id="str5" value="5"><label for="str5"></label></span><span><input type="radio" name="rating" id="str4" value="4"><label for="str4"></label></span><span><input type="radio" name="rating" id="str3" value="3"><label for="str3"></label></span><span><input type="radio" name="rating" id="str2" value="2"><label for="str2"></label></span><span><input type="radio" name="rating" id="str1" value="1"><label for="str1"></label></span>';
+					ratingDiv.appendChild(innerDivTag);
+					
+					innerDivTag.innerHTML = ratingContents;
 					cellName.appendChild(ratingDiv);
 				}
 				
 	
-				//Otherwise build the table from what is in the DB.
+				//Otherwise build the table from what is in the DB. Part 2
 				else{
 					callNameDB = "data[" + i + "]" + ".doc." + dbArray[j];
 					//Changing from a string to a variable
@@ -236,6 +265,9 @@ function showTableOfData(data) {
 			afterHeader++;
 		}
 	}
+
+	
+	//Check to see if there is anything in the database.
 	else if(data.length == 0){
 			div.innerHTML = "Your database is empty";
 	}
@@ -244,6 +276,8 @@ function showTableOfData(data) {
 	if (counter < 1) {
 		counter++;
 		console.log(counter + " counter");
+		console.log(myTable);
+		//To make sure I don't print the table twice I first make the div empty.
 		$(div).empty();
 		div.appendChild(myTable);
      // do something
@@ -251,8 +285,28 @@ function showTableOfData(data) {
 	else{
 		console.log(myTable);
 	}
+
+	$(document).ready(function(){
+
+	//  Check Radio-box
+	$(".rating input:radio").attr("checked", false);
+		$('.rating span').click(function () {
+			
+			//$(".rating span").removeClass('checked');
+			$(this).addClass('checked');
+		});
+
+		$('input:radio').change(
+		function(){
+			var userRating = this.value;
+			//$(this).parent().parent().addClass('rated');
+
+		}); 
+	});
+
 }
 
+//Step 4: Delete from DB
 //This function will remove the data from the database based on what the user clicks on
 function deleteBP(id, rev) {
   console.log(id + " Here " + rev);
@@ -272,7 +326,7 @@ function deleteBP(id, rev) {
 /**********************************************************************************************
 Geo Location code
 **********************************************************************************************/
-function geoLocation(){
+/* function geoLocation(){
 	var mapSpace = document.getElementById('map-canvas');
 
 	var geocoder = new google.maps.Geocoder();
@@ -297,7 +351,7 @@ function geoLocation(){
 	
 
 
-}
+} */
 
 
 
