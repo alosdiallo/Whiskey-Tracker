@@ -71,6 +71,10 @@ var db = new PouchDB('whiskeyTest');
 var remoteCouch = false;
 var counter = 0;
 
+
+
+
+
 //Grabbing the buttons
 var whiskeySbtn = document.getElementById("whiskeyButton");
 var whiskeySubmitButtonShow = document.getElementById("whiskeyButtonShow");
@@ -164,12 +168,13 @@ function showTableOfData(data) {
 	myTable.style.width='100%';
 	myTable.setAttribute('border','1');
 	//This array has all of the header names.
-	var arrayText = [ 'Brand', 'Name', 'Vintage','Type', 'Country', 'Cost','Date','Rating','Delete'];
-	var dbArray = ['brand','name','vintage' ,'type' , 'country' , 'cost' , '_id','Rating','Delete'];
+	var arrayText = [ 'Brand', 'Name', 'Vintage','Type', 'Country', 'Cost','Date','Delete'];
+	var dbArray = ['brand','name','vintage' ,'type' , 'country' , 'cost' , '_id','Delete'];
 	//Making the first row
 	var header = myTable.createTHead();
 	var row = header.insertRow(0); 
 
+	
 	//Here I am making the header for the table
 	for ( var i=0; i< arrayText.length; i++ ) {
 		var cellName = "cell";
@@ -198,7 +203,6 @@ function showTableOfData(data) {
 				cellName = "cell";
 				cellName.concat(j);
 				cellName = currentRow.insertCell(j);
-				
 				var buttonID = 'deleteButton' + i;
 				buttonID = String(buttonID);
 				var deleteButton = document.createElement('button');
@@ -209,19 +213,10 @@ function showTableOfData(data) {
 				deleteButton.addEventListener("click",function () {deleteBP(docId,revId);}, false);
 				//If at the last spot add the button to the table
 				if(dbArray[j].match('Delete')){
+				//if(j == 7){	
 					cellName.appendChild(deleteButton);
 					 
 				}
-				else if(dbArray[j].match('Rating')){
-					var spanID = 'SPAN' + i;
-					var ratingDiv = document.createElement(spanID);
-					ratingDiv.setAttribute('class', 'starRating');
-					var ratingContents = '<input id="'+ i +'rating5" type="radio" name="rating" value="5"><label for="rating5">5</label><input id="'+ i +'rating4" type="radio" name="rating" value="4"><label for="rating4">4</label><input id="'+ i +'rating3" type="radio" name="rating" value="3" checked><label for="rating3">3</label><input id="'+ i +'rating2" type="radio" name="rating" value="2"><label for="rating2">2</label><input id="'+ i +'rating1" type="radio" name="rating" value="1"><label for="rating1">1</label>';
-					ratingDiv.innerHTML = ratingContents;
-					cellName.appendChild(ratingDiv);
-				}
-				
-	
 				//Otherwise build the table from what is in the DB.
 				else{
 					callNameDB = "data[" + i + "]" + ".doc." + dbArray[j];
