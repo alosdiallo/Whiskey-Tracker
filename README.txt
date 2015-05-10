@@ -32,5 +32,8 @@ Windows Phone 8+
 Table design learned from http://www.smashingmagazine.com/ "Top 10 CSS Table Designs"
 Here is the link to the tutorial:http://www.smashingmagazine.com/2008/08/13/top-10-css-table-designs/ 
 
+I received help with the rating section of the app here is the stackoverflow question that keeps track of what I tried and did:
+http://stackoverflow.com/questions/30146014/css-control-for-multiple-divs-with-different-results
+
 To help me style the form I used the html tutorial:
 http://www.freshdesignweb.com/css-registration-form-templates.html

@@ -234,7 +234,7 @@ function showTableOfData(data) {
 					 
 				}
 				
-				//Code to handle the rating system
+				//Code to handle the rating system DOM element creation
 				else if(dbArray[j].match('Rating')){
 					var generalDiv = 'div';
 					var divID = 'div' + i;
@@ -245,10 +245,7 @@ function showTableOfData(data) {
 					innerDivTag.setAttribute('class', 'rating');
 					var ratingContents = '<span  class="star" data-value="5">*</span><span class="star" data-value="4">*</span><span class="star" data-value="3">*</span><span class="star" data-value="2">*</span><span class="star selected" data-value="1">*</span>';
 					ratingDiv.appendChild(innerDivTag);
-					
-					
-					
-					
+
 					innerDivTag.innerHTML = ratingContents;
 					cellName.appendChild(ratingDiv);
 				}
@@ -278,17 +275,17 @@ function showTableOfData(data) {
 	//If the table is not there then display it.
 	if (counter < 1) {
 		counter++;
-		console.log(counter + " counter");
-		console.log(myTable);
 		//To make sure I don't print the table twice I first make the div empty.
 		$(div).empty();
 		div.appendChild(myTable);
-     // do something
+     
 	}
+	//Look at what is going on.
 	else{
 		console.log(myTable);
 	}
 
+	//Code to handle to rating system behaviour
 	$(document).ready(function () {
 		$('.rating .star').click(function (evt) {
 			var $target = $(evt.currentTarget);
