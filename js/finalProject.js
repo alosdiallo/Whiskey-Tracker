@@ -243,8 +243,11 @@ function showTableOfData(data) {
 					
 					var innerDivTag = document.createElement('div');
 					innerDivTag.setAttribute('class', 'rating');
-					var ratingContents = '<span><input type="radio" name="rating" id="str5" value="5"><label for="str5"></label></span><span><input type="radio" name="rating" id="str4" value="4"><label for="str4"></label></span><span><input type="radio" name="rating" id="str3" value="3"><label for="str3"></label></span><span><input type="radio" name="rating" id="str2" value="2"><label for="str2"></label></span><span><input type="radio" name="rating" id="str1" value="1"><label for="str1"></label></span>';
+					var ratingContents = '<span  class="star" data-value="5">*</span><span class="star" data-value="4">*</span><span class="star" data-value="3">*</span><span class="star" data-value="2">*</span><span class="star selected" data-value="1">*</span>';
 					ratingDiv.appendChild(innerDivTag);
+					
+					
+					
 					
 					innerDivTag.innerHTML = ratingContents;
 					cellName.appendChild(ratingDiv);
@@ -286,24 +289,15 @@ function showTableOfData(data) {
 		console.log(myTable);
 	}
 
-	$(document).ready(function(){
-
-	//  Check Radio-box
-	$(".rating input:radio").attr("checked", false);
-		$('.rating span').click(function () {
+	$(document).ready(function () {
+		$('.rating .star').click(function (evt) {
+			var $target = $(evt.currentTarget);
+			$target.parent().find('.star').removeClass('selected');
+			$target.addClass('selected');
+			//var userRating = this.data('value');
 			
-			//$(".rating span").removeClass('checked');
-			$(this).addClass('checked');
 		});
-
-		$('input:radio').change(
-		function(){
-			var userRating = this.value;
-			//$(this).parent().parent().addClass('rated');
-
-		}); 
 	});
-
 }
 
 //Step 4: Delete from DB

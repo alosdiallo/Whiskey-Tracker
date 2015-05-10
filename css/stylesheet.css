@@ -1,31 +1,27 @@
 .rating {
-    float:left;
-    width:300px;
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    text-align: left;
 }
-.rating span { float:right; position:relative; }
-.rating span input {
-    position:absolute;
-    top:0px;
-    left:0px;
-    opacity:0;
+.rating > .star {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    width: 1.1em;
 }
-.rating span label {
-    display:inline-block;
-    width:30px;
-    height:30px;
-    text-align:center;
-    color:#FFF;
-    background:#ccc;
-    font-size:30px;
-    margin-right:2px;
-    line-height:30px;
-    border-radius:50%;
-    -webkit-border-radius:50%;
+.rating > .star:hover,
+.rating > .star:hover ~ .star,
+.rating > .star.selected,
+.rating > .star.selected ~ .star {
+    color: transparent;
+    2
 }
-.rating span:hover ~ span label,
-.rating span:hover label,
-.rating span.checked label,
-.rating span.checked ~ span label {
-    background:#F90;
-    color:#FFF;
+.rating > .star:hover:before,
+.rating > .star:hover ~ .star:before,
+.rating > .star.selected:before,
+.rating > .star.selected ~ .star:before {
+    content:"\2605";
+    position: absolute;
+    left: 0;
+    color: gold;
 }
