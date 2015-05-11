@@ -167,7 +167,7 @@ whiskeySbtn.onclick = function addWhiskey() {
 /*Once you click on the button it will send the 
 whole db object to showTableOfData to be output.
 */
-whiskeySubmitButtonShow.onclick = function(){showData();}
+whiskeySubmitButtonShow.onclick = function(){showData();};
 
 function showData() {
 	//passing all of the data in the db to the relevant functions
