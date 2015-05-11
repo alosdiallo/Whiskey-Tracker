@@ -107,6 +107,12 @@ var db = new PouchDB('whiskeyTest');
 var remoteCouch = false;
 var counter = 0;
 
+//When something changes show the DB contents.
+//Not sure if I will keep for production Alos 5/11/2015
+/* db.changes({
+  since: 'now',
+  live: true
+}).on('change', showData); */
 
 
 //Step 2: This is the code for adding a new whiskey to the Database
@@ -175,6 +181,7 @@ function showData() {
 				function(err, doc) {
 					showTableOfData(doc.rows);
 					plotCost(doc.rows);
+					valueByType(doc.rows);
 				} );
 				
 	
@@ -188,10 +195,12 @@ function showTableOfData(data) {
 	$("output").html("");	
 	//Here I am creating the table 
 	var myTable = document.createElement("table");
+
 	myTable.setAttribute("id", "dbResultsTable");
-	//Styling the table so that it has a boarder
+	//Styling the table 
 	myTable.style.width='100%';
 	myTable.setAttribute('border','1');
+	myTable.style.overflow = "scroll";
 	//This array has all of the header names.
 	var arrayText = [ 'Brand', 'Name', 'Vintage','Type', 'Country', 'Cost', 'Number of Bottles','Date','Rating','Delete'];
 	var dbArray = ['brand','name','vintage' ,'type' , 'country' , 'cost', 'bottle', '_id','Rating','Delete'];
@@ -328,34 +337,48 @@ function deleteBP(id, rev) {
 }
 
 /**********************************************************************************************
-Geo Location code
+Using this function to plot the value by type of whiskey I will be using Google charts api
 **********************************************************************************************/
-/* function geoLocation(){
-	var mapSpace = document.getElementById('map-canvas');
+function valueByType(data){
 
-	var geocoder = new google.maps.Geocoder();
-	var address = 'Boston, MA';
-	var lat = '';
-	var lon = '';
-	if (geocoder) {
-	  geocoder.geocode({ 'address': address }, function (results, status) {
-		 if (status == google.maps.GeocoderStatus.OK) {
-			lat = results[0].geometry.location.lat();
-			lat = parseFloat(lat);
-			lon = results[0].geometry.location.lng();
-			lon = parseFloat(lon);
-			console.log(results[0].geometry.location.lat());
-			console.log(results[0].geometry.location.lng());
-		 }
-		 else {
-			console.log("Geocoding failed: " + status);
-		 }
-	  });
-	}  
+	//Creating the array that will hold the cost data.
+	var typeOfWhiskey =  new Array();
+	var amountOfWhiskey = new Array();
+	var j = 1;
+	var hash = {};
+	var consolidated = [];
 	
+	//Populating an array of the cost data.
+	for(var i=0; i< data.length; i++){
+		var typeW = String(data[i].doc.type);
+		console.log(typeW);
+		var valueAsNumber = parseInt(data[i].doc.bottle);
+		typeOfWhiskey[j,i] = [typeW,valueAsNumber];
+		j++;
+	}	
+	typeOfWhiskey.forEach(function (item) {
+		hash[item[0]] = (hash[item[0]] || 0) + item[1];
+	});
+
+	Object.keys(hash).forEach(function (key) {
+		consolidated.push([key, hash[key]]);
+	});	
+	
+	var whiskeyData = google.visualization.arrayToDataTable(consolidated,true);
+	console.log(consolidated);
+
+	var options = {
+	  title: 'Breakdown of Whiskey by Type'
+	};
+
+	var chart = new google.visualization.PieChart(document.getElementById('valueByType'));
+
+	chart.draw(whiskeyData, options);
+    
+       
 
 
-} */
+}
 
 
 
