@@ -167,7 +167,9 @@ whiskeySbtn.onclick = function addWhiskey() {
 /*Once you click on the button it will send the 
 whole db object to showTableOfData to be output.
 */
-whiskeySubmitButtonShow.onclick = function showData() {
+whiskeySubmitButtonShow.onclick = function(){showData();}
+
+function showData() {
 	//passing all of the data in the db to the relevant functions
 	db.allDocs( {include_docs: true, descending: true},
 				function(err, doc) {
@@ -308,9 +310,12 @@ function showTableOfData(data) {
 //Step 4: Delete from DB
 //This function will remove the data from the database based on what the user clicks on
 function deleteBP(id, rev) {
+
   console.log(id + " Here " + rev);
   db.remove(id,rev).then(function () {
-	  // success
+    var div = document.getElementById("outPut");
+	counter = 0;
+	showData();
 	}).catch(function (err) {
 	  if (err.status === 409) {
 		// conflict!
