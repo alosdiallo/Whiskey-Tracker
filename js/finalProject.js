@@ -356,6 +356,8 @@ function valueByType(data){
 		typeOfWhiskey[j,i] = [typeW,valueAsNumber];
 		j++;
 	}	
+	
+	/*Consolidating the amount based on what you have in stock*/
 	typeOfWhiskey.forEach(function (item) {
 		hash[item[0]] = (hash[item[0]] || 0) + item[1];
 	});
@@ -363,9 +365,9 @@ function valueByType(data){
 	Object.keys(hash).forEach(function (key) {
 		consolidated.push([key, hash[key]]);
 	});	
-	
+	/*Consolidating the amount based on what you have in stock END*/
 	var whiskeyData = google.visualization.arrayToDataTable(consolidated,true);
-	console.log(consolidated);
+	
 
 	var options = {
 	  title: 'Breakdown of Whiskey by Type'
@@ -379,11 +381,6 @@ function valueByType(data){
 
 
 }
-
-
-
-
-
 
 /*****************************************************************************
 Using this function to plot the cost data I will be using Google charts api
