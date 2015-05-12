@@ -351,7 +351,6 @@ function valueByType(data){
 	//Populating an array of the cost data.
 	for(var i=0; i< data.length; i++){
 		var typeW = String(data[i].doc.type);
-		console.log(typeW);
 		var valueAsNumber = parseInt(data[i].doc.bottle);
 		typeOfWhiskey[j,i] = [typeW,valueAsNumber];
 		j++;
