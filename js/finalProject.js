@@ -100,7 +100,8 @@ window.onload = function formValidation(){
       { label: "Bourbon", category: "American" },
       { label: "Scotch", category: "Scottish" },
       { label: "Whiskey", category: "World" },
-      { label: "Whisky", category: "Scottish" }
+      { label: "Whisky", category: "Scottish" },
+	  { label: "Rye", category: "American" }
 
     ];
 	
@@ -189,12 +190,24 @@ whiskeySbtn.onclick = function addWhiskey() {
 	var costW = document.getElementById("Cost").value.trim();
 	var bottleW = document.getElementById("BottleNumber").value.trim();
 	
+	
+	/*In this case I decided to create a json object and then iterate through it to check to see if the text fields were blank.  I didn't want to have 
+	a ton of if statements and thought this would be a better way to go about it.*/
+	var formTextEl = {"name":"Name","brand":"Brand","vintage":"Vintage","type":"Type","country":"Country","cost":"Cost","bottle":"BottleNumber"};
+	var checkVal = 0;
 	//Check to see if our text boxes are empty.
-	if(document.getElementById("Brand").value == ''){
-
-		console.log("Entry Details No data " + document.getElementById("Brand").value);
+	for (var key in formTextEl) {
+		if (formTextEl.hasOwnProperty(key)) {
+			var textContents = formTextEl[key];
+			if(!document.getElementById(textContents).value == ''){
+				checkVal++;
+			}
+		}
 	}
-
+	
+	if(checkVal < 7){
+		alert("Please make sure to fill in all of the fields.");
+	}
 	else{
 		//Create the custom object to populate so that we can populate the DB.
 		var entry = {
