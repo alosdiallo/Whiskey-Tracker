@@ -12,6 +12,12 @@ The GIT repository for the site is: https://github.com/alosdiallo/Whiskey-Tracke
 ***Plotting***
 I used Google Chart APi to help with the plotting of data. I found this easier to use than D3.
 https://developers.google.com/chart/interactive/docs/reference
+
+***AutoComplete widget***
+I used the jquery autocomplete widget to help me make sure that the user was consistent with 
+their naming.  The user is free to not use the help however.  
+https://jqueryui.com/autocomplete/#categories
+
 ***PouchDB***
 The database will be built and handled using PouchDB.  Documentation can be found:
 http://pouchdb.com/
@@ -32,6 +38,7 @@ Windows Phone 8+
 Table design learned from http://www.smashingmagazine.com/ "Top 10 CSS Table Designs"
 Here is the link to the tutorial:http://www.smashingmagazine.com/2008/08/13/top-10-css-table-designs/ 
 For the Header I use Google WebFonts and Google Web Font Effects.
+https://developers.google.com/fonts/docs/getting_started
 
 I received help with the rating section of the app here is the stackoverflow question that keeps track of what I tried and did:
 http://stackoverflow.com/questions/30146014/css-control-for-multiple-divs-with-different-results

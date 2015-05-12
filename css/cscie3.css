@@ -4,6 +4,13 @@
     font-size: 50px;
 
 }
+.ui-autocomplete-category {
+font-weight: bold;
+padding: .2em .4em;
+margin: .8em 0 .2em;
+line-height: 1.5;
+}
+
 body{
   
   background-color:#f0f0f0;

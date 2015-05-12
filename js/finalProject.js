@@ -58,6 +58,7 @@ window.onload = function formValidation(){
 			alert(err.message);
 		}
 	});
+	//Makes sure that someone does not enter a number in for number of bottles.
 	f.elements["BottleNumber"].addEventListener("focusout", function() {
 		try {
 			f.elements["BottleNumber"].value = f.elements["BottleNumber"].value.replace(/\D/g,'');	
@@ -66,7 +67,68 @@ window.onload = function formValidation(){
 			alert(err.message);
 		}
 	});
-  
+	
+	
+	/*Here I am using jqueryui autocomplete widget to help create an autocomple function for 
+	country and type of whiskey.  This is important because they are used for plotting later 
+	and I wanted to make sure that the user was consistent with naming.*/
+	$.widget( "custom.catcomplete", $.ui.autocomplete, {
+	_create: function() {
+	  this._super();
+	  this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
+	},
+	_renderMenu: function( ul, items ) {
+	  var that = this,
+		currentCategory = "";
+	  $.each( items, function( index, item ) {
+		var li;
+		if ( item.category != currentCategory ) {
+		  ul.append( "<li class='ui-autocomplete-category'>" + item.category + "</li>" );
+		  currentCategory = item.category;
+		}
+		li = that._renderItemData( ul, item );
+		if ( item.category ) {
+		  li.attr( "aria-label", item.category + " : " + item.label );
+		}
+	  });
+	}
+	});	
+	
+	//Creating an object to hold the type of whiskey
+	$(function() {
+    var whiskeyType = [
+      { label: "Bourbon", category: "American" },
+      { label: "Scotch", category: "Scottish" },
+      { label: "Whiskey", category: "World" },
+      { label: "Whisky", category: "Scottish" }
+
+    ];
+	
+	//Creating an object to hold the Country of Origin info
+	var CountryName = [
+      { label: "USA", category: "" },
+      { label: "Scotland", category: "" },
+      { label: "Japan", category: "" },
+      { label: "India", category: "" },
+	  { label: "Irish", category: "" },
+	  { label: "Canadian", category: "" },
+	  { label: "Taiwan", category: "" }
+
+    ];
+	
+	//Attaching the complete property to the two div's.
+    $( "#Type" ).catcomplete({
+      delay: 0,
+      source: whiskeyType
+    });
+    $( "#Country" ).catcomplete({
+      delay: 0,
+      source: CountryName
+    });	
+	
+	
+  });
+	  
 }
 
 
@@ -132,6 +194,7 @@ whiskeySbtn.onclick = function addWhiskey() {
 
 		console.log("Entry Details No data " + document.getElementById("Brand").value);
 	}
+
 	else{
 		//Create the custom object to populate so that we can populate the DB.
 		var entry = {
