@@ -445,7 +445,10 @@ function valueByType(data){
 	
 
 	var options = {
-	  title: 'Breakdown of Whiskey by Type'
+	  title: 'Breakdown of Whiskey by Type',
+	  'width':400,
+      'height':300 
+
 	};
 
 	var chart = new google.visualization.PieChart(document.getElementById('valueByType'));
@@ -483,7 +486,7 @@ function plotCost(data){
 	//Creating an object to hold the information that is sent to the api.	
 	var options = {
 	  title: 'Whiskey Cost',
-	  hAxis: {title: 'Bottle Number', minValue: 0, maxValue: maxBNumber},
+	  hAxis: {title: 'Entry Number', minValue: 0, maxValue: maxBNumber},
 	  vAxis: {title: 'Cost', minValue: 0, maxValue: maxCNumber},
       'width':400,
       'height':300,	  

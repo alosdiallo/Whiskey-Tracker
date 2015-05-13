@@ -9,8 +9,13 @@ font-weight: bold;
 padding: .2em .4em;
 margin: .8em 0 .2em;
 line-height: 1.5;
+font-size: 12px;
 }
+.li{
 
+font-size: 12px;
+
+}
 body{
   
   background-color:#f0f0f0;
