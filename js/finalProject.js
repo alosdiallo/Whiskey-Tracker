@@ -382,12 +382,7 @@ function showTableOfData(data) {
 		console.log(myTable);
 	}
 	
-	try{
-	$(myTable).stupidtable();
-	}
-	catch(err) {
-    console.log(err.message);
-	}
+
 	//Code to handle to rating system behaviour
 	$(document).ready(function () {
 		$('.rating .star').click(function (evt) {
