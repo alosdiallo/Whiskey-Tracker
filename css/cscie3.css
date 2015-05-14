@@ -16,6 +16,7 @@ font-size: 12px;
 font-size: 12px;
 
 }
+
 body{
   
   background-color:#f0f0f0;
@@ -54,6 +55,13 @@ body{
 	border-bottom: 1px solid #fff;
 	color: #039;
 }
+
+th[data-sort]{
+      cursor:pointer;
+    }
+tr.awesome{
+      color: red;
+    }
 #dbResultsTable td
 {
 	padding: 8px;

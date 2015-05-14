@@ -6,7 +6,7 @@ Final Project: To create an app that lets users track their whiskey purchases.
 ***User Help***
 To load the site make sure you have an http server running then navigate to: http://127.0.0.1:8000/
 If you have python and want to start up server: python -m SimpleHTTPServer
-Deleting the whole db command: new PouchDB('whiskeyLibrary').destroy()
+Deleting the whole db command: new PouchDB('whiskeyTest').destroy()
 The GIT repository for the site is: https://github.com/alosdiallo/Whiskey-Tracker
 
 ***Plotting***

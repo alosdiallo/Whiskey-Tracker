@@ -284,12 +284,14 @@ function showTableOfData(data) {
 	var header = myTable.createTHead();
 	var row = header.insertRow(0); 
 
+
 	//Here I am making the header for the table
 	for ( var i=0; i< arrayText.length; i++ ) {
+        var th = document.createElement("th");
 		var cellName = "cell";
 		cellName.concat(i);
-		var cellName = row.insertCell(i);
-		cellName.innerHTML = arrayText[i];
+		th.innerHTML = arrayText[i];
+        row.appendChild(th);
 	
 	}
 		//console.log(myTable.rows.item(0).innerHTML);
@@ -338,7 +340,7 @@ function showTableOfData(data) {
 					
 					var innerDivTag = document.createElement('div');
 					innerDivTag.setAttribute('class', 'rating');
-					var ratingContents = '<span  class="star" data-value="5">*</span><span class="star" data-value="4">*</span><span class="star" data-value="3">*</span><span class="star" data-value="2">*</span><span class="star selected" data-value="1">*</span>';
+					var ratingContents = '<span  class="star" id ="5" data-value="5">*</span><span class="star" id ="4" data-value="4">*</span><span class="star" id ="3" data-value="3">*</span><span class="star" id ="2" data-value="2">*</span><span class="star selected" id ="1" data-value="1">*</span>';
 					ratingDiv.appendChild(innerDivTag);
 
 					innerDivTag.innerHTML = ratingContents;
@@ -373,20 +375,30 @@ function showTableOfData(data) {
 		//To make sure I don't print the table twice I first make the div empty.
 		$(div).empty();
 		div.appendChild(myTable);
-     
 	}
+	
 	//Look at what is going on.
 	else{
 		console.log(myTable);
 	}
-
+	
+	try{
+	$(myTable).stupidtable();
+	}
+	catch(err) {
+    console.log(err.message);
+	}
 	//Code to handle to rating system behaviour
 	$(document).ready(function () {
 		$('.rating .star').click(function (evt) {
 			var $target = $(evt.currentTarget);
 			$target.parent().find('.star').removeClass('selected');
 			$target.addClass('selected');
-			//var userRating = this.data('value');
+			var textHolder = $target.parent().context;
+			var textHolder2 = $target.parent();
+			alert(textHolder.id);
+			console.log(textHolder);
+
 			
 		});
 	});
@@ -509,6 +521,6 @@ function plotCost(data){
 
 
 //Helper functions for testing.
-// Deleting the whole db command: new PouchDB('whiskeyLibrary').destroy()
+// Deleting the whole db command: new PouchDB('whiskeyTest').destroy()
 //Start up server: python -m SimpleHTTPServer
 
