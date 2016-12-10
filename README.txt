@@ -1,7 +1,4 @@
-CSCI E-3 Introduction to Web Programming Using Javascript
-Spring 2015
-Alos Diallo
-Final Project: To create an app that lets users track their whiskey purchases. 
+To create an app that lets users track their whiskey purchases. 
 
 ***User Help***
 To load the site make sure you have an http server running then navigate to: http://127.0.0.1:8000/
