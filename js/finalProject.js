@@ -1,4 +1,4 @@
-/* CSCI E-3 Introduction to Web Programming Using Javascript
+/* Whiskey Tracker
  * Spring 2015
  * Alos Diallo
  *
