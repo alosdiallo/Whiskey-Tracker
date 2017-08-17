@@ -518,4 +518,5 @@ function plotCost(data){
 //Helper functions for testing.
 // Deleting the whole db command: new PouchDB('whiskeyTest').destroy()
 //Start up server: python -m SimpleHTTPServer
+//Start up server on python 3: python -m http.server
 
