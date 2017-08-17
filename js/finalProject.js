@@ -3,7 +3,7 @@
  * Alos Diallo
  *
  * To load the site make sure you have an http server running then navigate to: http://127.0.0.1:8000/
- * Final Project: To create an app that lets users track their whiskey purchases.  
+ * Project: To create an app that lets users track their whiskey purchases.  
  * The database will be built and handled using PouchDB.  Documentation can be found:
  * http://pouchdb.com/
  * My reasoning for choosing PouchDB is that depending on the browser the system will
